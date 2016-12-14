@@ -3,13 +3,9 @@
 const joi = require('joi')
 
 const envVarsSchema = joi.object({
-  REDIS_URI: joi.string()
-    .uri({ scheme: 'redis' })
-    .required(),
-  REDIS_DATA_RETENTION_IN_MS: joi.number()
-    .default(86400000)
-}).unknown()
-  .required()
+  REDIS_URI: joi.string().uri({ scheme: 'redis' }).required(),
+  REDIS_DATA_RETENTION_IN_MS: joi.number().default(86400000)
+}).unknown().required()
 
 const { error, value: envVars } = joi.validate(process.env, envVarsSchema)
 if (error) {

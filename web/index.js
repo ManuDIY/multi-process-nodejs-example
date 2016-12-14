@@ -15,3 +15,13 @@ serverListen(config.server.port)
     logger.error('Error happened during server start', err)
     process.exit(1)
   })
+
+process.on('SIGTERM', () => {
+  server.close((err) => {
+    if (err) {
+      logger.error('Error happened during server close', err)
+      process.exit(1)
+    }
+    process.exit(0)
+  })
+})

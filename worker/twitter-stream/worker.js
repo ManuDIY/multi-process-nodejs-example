@@ -26,17 +26,10 @@ stream.on('data', (event) => {
     .queue(queue)
     .publish(message)
     .then(() => {
-      logger.debug('New tweet received, published message to queue', {
-        queue,
-        message
-      })
+      logger.debug('New tweet received, published message to queue', { queue, message })
     })
     .catch((err) => {
-      logger.error('New tweet received, error happened during message publish to queue', {
-        queue,
-        err
-      })
-
+      logger.error('New tweet received, error happened during message publish to queue', { queue, err })
       throw err
     })
 })
@@ -44,4 +37,14 @@ stream.on('data', (event) => {
 stream.on('error', (err) => {
   logger.error('Twitter stream error', err)
   throw err
+})
+
+process.on('SIGTERM', () => {
+  try {
+    stream.destroy()
+  } catch (err) {
+    logger.error('Error happened during stream destroy', err)
+    process.exit(1)
+  }
+  process.exit(0)
 })
