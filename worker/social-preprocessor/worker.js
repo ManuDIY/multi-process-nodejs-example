@@ -1,6 +1,5 @@
 'use strict'
 
-const trace = require('@risingstack/trace')
 const joi = require('joi')
 const logger = require('winston')
 const config = require('../../config')
@@ -33,7 +32,6 @@ const queue = tortoise
     redis.zadd(redis.SET.tweets, value.createdAt.getTime(), JSON.stringify(msg))
       .then(() => {
         logger.debug('Social preprocessor save success', { msg })
-        trace.incrementMetric('tweets/saved')
         ack()
       })
       .catch((err) => {
@@ -63,7 +61,7 @@ process.on('SIGTERM', () => {
   try {
     logger.debug('closing redis')
     redis.disconnect()
-    logger.debug('redis closed')
+    logger.debug('redis closed') // FIXME: order of execution
   } catch (err) {
     logger.error('Error happened during redis disconnect', err)
     process.exit(1)

@@ -1,6 +1,7 @@
 'use strict'
 
-const joi = require('joi')
+const path = require('path')
+const joi  = require('joi')
 
 const envVarsSchema = joi.object({
   NODE_ENV: joi.string()
@@ -15,7 +16,8 @@ if (error) {
 }
 
 const config = {
-  env: envVars.NODE_ENV
+  env: envVars.NODE_ENV,
+  root: path.normalize(`${__dirname}/../..`)
 }
 
 module.exports = config

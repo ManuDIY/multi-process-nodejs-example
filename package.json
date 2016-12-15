@@ -9,7 +9,8 @@
     "start:dev": "NODE_ENV=development nodemon .",
     "test-web": "NODE_ENV=test PROCESS_TYPE=web mocha --require co-mocha test/setup.js 'web/**/*.spec.js'",
     "test": "npm run test-web",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "set:build": "node scripts/set-build.js"
   },
   "author": "Andras Toth <andras.toth@risingstack.com>",
   "license": "MIT",
@@ -29,7 +30,6 @@
     "super-request": "1.1.0"
   },
   "dependencies": {
-    "@risingstack/trace": "2.36.0",
     "dotenv": "2.0.0",
     "es6-promisify": "5.0.0",
     "ioredis": "2.4.2",
@@ -39,6 +39,7 @@
     "qs": "6.3.0",
     "tortoise": "1.0.1",
     "twitter": "1.7.0",
+    "uuid": "^3.0.1",
     "winston": "2.3.0"
   },
   "pre-commit": [

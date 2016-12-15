@@ -1,9 +1,10 @@
 'use strict'
 
-const Router = require('koa-router')
-const api = require('./api')
+const config  = require('../../config/')
+const api     = require('./api')
+// const version = require('./version')
 
-const router = new Router()
+const { router } = config
 
 // endpoints
 router.get('/api/v1/tweets', api.tweets.get)
