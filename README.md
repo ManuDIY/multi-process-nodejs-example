@@ -29,6 +29,7 @@ The process is listening on twitter for keywords and sends the tweets to a Rabbi
   - `TWITTER_ACCESS_TOKEN_SECRET`
   - `TWITTER_TRACK`: comma separated keywords to track, eg. `nodejs,node.js,risingstack,microservice,micro-service`
   - `RABBITMQ_URI`
+  - `HEALTH_PORT`: the port for the server of the health check endpoint, URL -> - `GET /health`
 
 ### Social preprocessor worker
 
@@ -42,12 +43,14 @@ The process is listening on the RabbitMQ queue and saves the tweets to Redis and
   - `RABBITMQ_URI`
   - `REDIS_URI`
   - `REDIS_DATA_RETENTION_IN_MS`, default: `86400000` (1 day)
+  - `HEALTH_PORT`: the port for the server of the health check endpoint, URL -> - `GET /health`
 
 ### Web
 
 The process is serving an HTTP API to return the tweets.
 
   - `GET /api/v1/tweets?limit&offset`
+  
 
 #### Environment variables
 
